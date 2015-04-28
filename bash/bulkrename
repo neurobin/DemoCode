@@ -1,0 +1,7 @@
+#!/bin/bash
+files=*.ext
+for file in $files; do
+file="${file:0:-4}"
+[[ "$file" == *"*"* && -f $file.ext && ! -L $file.ext ]] &&
+newfile="${file//'*'/'#'}" && mv "$file.ext" "$newfile.ext"
+done
