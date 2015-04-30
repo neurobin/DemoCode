@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "CbEYKFKt" | sudo -S echo && sudo -s <<EOF
+#put your code here
+#All codes will be executed as sudo
+EOF
