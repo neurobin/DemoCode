@@ -1,0 +1,8 @@
+#!/bin/bash
+directoryX=~/newfolder
+directoryY=/pathtoY
+for file in $directoryX/*; do
+filename="${file##*/}"
+dirname="${filename%%.*}"
+#cp "$file" "$directoryY"/"$dirname"/"$filename"
+done

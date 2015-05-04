@@ -1,7 +1,11 @@
 #!/bin/bash
-files=*.ext
-for file in $files; do
-file="${file:0:-4}"
-[[ "$file" == *"*"* && -f $file.ext && ! -L $file.ext ]] &&
-newfile="${file//'*'/'#'}" && mv "$file.ext" "$newfile.ext"
+while true; do
+read -e -p "Enter search extention: "
+
 done
+shopt -s globstar
+for file in /the/path/**/*.abc; do
+  mv "$file" "${file%.abc}.edefg"
+done
+
+

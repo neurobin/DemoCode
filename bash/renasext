@@ -1,0 +1,19 @@
+#!/bin/bash
+while true;do
+read -e -p "Enter search file extention: " searchext
+[[ $searchext != "" ]] && break
+done
+while true;do
+read -e -p "Enter destination file extention: " destext
+[[ $destext != "" ]] && break
+done
+while true;do
+read -e -p "Enter path: " path
+path="${path/\~/$HOME}"
+[[ $path != "" && -d $path ]] && break
+done
+shopt -s globstar
+for file in "$path"/**/*."$searchext"; do
+mv "$file" "${file%.$searchext}.$destext"
+echo "${file%.$searchext}.$destext"
+done

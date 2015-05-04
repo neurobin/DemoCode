@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#the following runs codes as sudo while logging as sudo only once
+echo "CbEYKFKt" | sudo -S echo && sudo -s <<EOF
+#put your code here
+#All codes will be executed as sudo
+EOF
+
+
+#The following checks if number is all digits, not start with 0 and exactly 10 char long
+while true; do
+read -e -p "Enter phone number: " number
+[[ ! $number == 0* && ${#number} == 10 && $number =~ [0-9]+$ ]] && echo "Got it" && break; 
+done
+
+#interpret ~ as /home/user
+livedir=${livedir/\~/$HOME}
