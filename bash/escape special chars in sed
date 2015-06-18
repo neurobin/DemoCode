@@ -15,3 +15,5 @@ sed -e's#\\#\\\\#g'	\
 -e "s#\'#\\\'#g"		\
 -e "s#\`#\\\`#g"		\
 file1
+#Cool way to sanitize input
+sed 's/[^^]/[&]/g; s/\^/\\^/g' file1

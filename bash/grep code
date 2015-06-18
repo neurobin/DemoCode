@@ -1,0 +1,2 @@
+#!/bin/bash
+grep -vxFf removethese.txt file.txt #deletes line matched from removethese.txt

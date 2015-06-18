@@ -1,3 +1,0 @@
-#!/bin/bash
-grep -vxFf removethese.txt file.txt
-sed 's=^=/\\b=;s=$=[[:space:]]*/d=' removethese.txt | sed -f- file.txt

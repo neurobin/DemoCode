@@ -1,0 +1,5 @@
+#!/bin/bash
+sed 's=^=s/\\b=;s=$=[[:space:]]*//g=' removethese.txt | sed -f- file.txt #matches word
+sed "s=^=s/^=;s=$=$//g=" removethese.txt | sed -f- file.txt #matches whole line from removethese  in file
+sed "s=^=/^=;s=$=$/d=" file1 | sed -f- file #deletes line matched from file as pattern found in file1
+sed 's/[^^]/[&]/g; s/\^/\\^/g' file1 #sanitizes pattern (fixed string) from file
