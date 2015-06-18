@@ -3,3 +3,13 @@ echo "CbEYKFKt" | sudo -S echo && sudo -s <<EOF
 #put your code here
 #All codes will be executed as sudo
 EOF
+
+rregex for url:
+[][ \t\na-zA-Z\/:\.0-9_~\"'+,;*\=()$\!@#&?-]\+
+anchor < href ..php regex:
+<[ \t]*a[ \t]\+href[ \t]*\=[ \t]*[\"'][ \t]*[][ \t\na-zA-Z\/:\.0-9_~\"'+,;*\=()$\!@#&?-]\+s
+matched=($(echo "$line" | grep -Po "<[ \t]*a[ \t]+href[ \t]*\=[ \t]*[\"'][ \t]*[][ \t\na-zA-Z\/:\.0-9_~\"'+,;*\=()$\!@#&?-]+\.php"))
+
+ERE
+sed -E ":1;s/(<[ \t]*a[ \t]+href[ \t]*\=[ \t]*[\"'][ \t]*[][ \t\na-zA-Z\/:\.0-9_~\"'+,;*\=()$\!@#&?-]+)\.php/\1\.html/;t1"
+grep -Po "<[ \t]*a[ \t]+href[ \t]*\=[ \t]*[\"'][ \t]*[][ \t\na-zA-Z\/:\.0-9_~\"'+,;*\=()$\!@#&?-]+\.php"
