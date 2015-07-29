@@ -1,0 +1,8 @@
+getfunc() {
+  declare -f "$@" | pygmentize -l bash
+}
+declare -f func
+func(){
+echo "I am a sample function"
+}
+getfunc func
