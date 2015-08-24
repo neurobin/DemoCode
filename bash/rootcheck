@@ -1,0 +1,5 @@
+if [ $EUID -ne 0 ]; then
+    echo -e "\n*********This script must be ran with root priviledge*********"
+    echo -e "*******************Sorry! Exiting*************************\n"
+    exit 2
+fi

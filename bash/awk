@@ -1,0 +1,6 @@
+
+Replace string with line number
+
+awk '{sub(/\<exit[[:blank:]]+[0-9]+/, "exit " NR)} 1' file
+replace with incremented index
+ awk  'BEGIN { var=1  }; {if(sub(/\<exit[[:blank:]]+[0-9]+/, "exit " var)){ var++; }} 1' 
