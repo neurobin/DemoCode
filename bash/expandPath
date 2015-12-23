@@ -17,10 +17,22 @@ expandPath() {
         path=$HOME/${path#"~/"}
         ;;
       "~"*)
+        old="$path"
         username=${path%%/*}
         username=${username#"~"}
-        IFS=: read _ _ _ _ _ homedir _ < <(getent passwd "$username")
-        assetsPath=${homedir}/${path#*/}
+        if [ x"$username" = x ];then
+            path=$HOME
+        else
+            IFS=: read _ _ _ _ _ homedir _ < <(getent passwd "$username")
+            if [[ $path = */* ]]; then
+              path=${homedir}/${path#*/}
+            else
+              path=$homedir
+            fi
+            if [ x"$path" = x ]; then
+                path="$old"
+            fi
+        fi
         ;;
     esac
     resultPathElements+=( "$path" )
