@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc: executed by bash(1) for# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -97,15 +97,19 @@ RESET="\[\017\]"
 gitPS1(){
     gitps1=$(git branch 2>/dev/null | grep '*')
     gitps1="${gitps1:+ (${gitps1/#\* /})}"
-    echo -e "$gitps1"
+    echo "$gitps1"
 }
 timeNow(){
-    echo -e "[$(date +%r)]"
+    echo "$(date +%r)"
 }
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[1;38m\]$(timeNow)\[\033[00m\] \[\033[00m\]\[\033[01;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\] \[\033[1;32m\]>\[\033[00m\]\[\033[1;32m\]>\[\033[00m\]\[\033[1;32m\]>\[\033[00m\] '
+  if [ x$EUID = x0 ]; then
+    PS1='\[\033[1;38m\][$(timeNow)]\[\033[00m\] \[\033[1;31m\]\u\[\033[00m\]\[\033[1;37m\]@\[\033[00m\]\[\033[1;33m\]\h\[\033[00m\] \[\033[1;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\] \[\033[1;31m\]:/#\[\033[00m\] '
+  else
+    PS1='\[\033[1;38m\][$(timeNow)]\[\033[00m\] \[\033[1;32m\]\u\[\033[00m\]\[\033[1;37m\]@\[\033[00m\]\[\033[1;33m\]\h\[\033[00m\] \[\033[1;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\] \[\033[1;32m\]:/$\[\033[00m\] '
+  fi
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='[$(timeNow)] \u@\h \w$(gitPS1) :/$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -158,13 +162,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#include users private bin
-if [ -d "/ownbin" ] ; then
-    PATH="/ownbin:$PATH"
-fi
-if [ -d ~/bin ] ; then
-    PATH="$PATH:/home/jahid/bin/"
-fi
-export DEBFULLNAME="Jahidul Hamid"
+
+export DEBFULLNAME="Md Jahidul Hamid"
 export DEBEMAIL="jahidulhamid@yahoo.com"
-export PATH=$PATH:/home/jahid/home/bin
+
