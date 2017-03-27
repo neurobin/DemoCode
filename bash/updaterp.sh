@@ -50,11 +50,6 @@ do
             echo "$help"
             exit 0
             ;;
-        *)
-            echo "$help"
-            echo "invalid option: '$1'"
-            exit 1
-        	;;
     esac
     shift
 done
