@@ -1,20 +1,28 @@
 #!/bin/sh
 
 set -e
+dist="stretch"
+arch="amd64"
+extracted="extracted"
+label="Debialin"
+origin="Debian"
+components="main"
+suit="$dist"
+override="$dist"
+
 help="
 Options:
-	-d , --dist 	:	dist
-	-a, --arch	:	architecture
-	-t, --target	:	targent directory (cd, extracted)
+	-d , --dist 	:	dist [$dist]
+	-a, --arch	:	architecture [$arch]
+	-t, --target	:	targent directory [$extracted]
+	-l, --label	:	label [$label]
+	-o, --origin	:	origin [$origin]
+	-c, --components:	components [$components]
+	-s, --suit	:	suit [$suit]
+	-ov, --override	:	override [$override]
 	-h, --help	:	help menu
 "
-dist=${1-stretch}
-arch=${2-amd64}
-extracted=${3-extracted}
-label=${4-Debialin}
-origin=${5-Debian}
-components=${6-main}
-suit=${7-$dist}
+
 while [ $# -gt 0 ]
 do
     case "$1" in
@@ -46,7 +54,11 @@ do
 		shift
 		suit="${1-$suit}"
 		;;
-        -h|--help)
+	-ov|--override)
+		shift
+		override="$1" #can be empty
+		;;
+        -h|--help|*)
             echo "$help"
             exit 0
             ;;
@@ -54,8 +66,11 @@ do
     shift
 done
 
+if [ "$override" = "" ]; then
+	override="$dist"
+fi
 
-override_url=http://ftp.de.debian.org/debian/indices/override.$dist.main.gz
+override_url=http://ftp.de.debian.org/debian/indices/override.$override.main.gz
 
 cachedir=updaterp.cache
 
