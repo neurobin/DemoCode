@@ -1,7 +1,7 @@
 # ~/.bashrc: executed by bash(1) for# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-
+alias ls='ls --color=auto'
 # Colors
 txtblk='\e[0;30m' # Black - Regular
 txtred='\e[0;31m' # Red
@@ -104,12 +104,12 @@ timeNow(){
 }
 if [ "$color_prompt" = yes ]; then
   if [ x$EUID = x0 ]; then
-    PS1='\[\033[1;38m\][$(timeNow)]\[\033[00m\] \[\033[1;31m\]\u\[\033[00m\]\[\033[1;37m\]@\[\033[00m\]\[\033[1;33m\]\h\[\033[00m\] \[\033[1;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\] \[\033[1;31m\]:/#\[\033[00m\] '
+    PS1='\[\033[1;38m\][$(timeNow)]\[\033[00m\] \[\033[1;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\]\[\033[1;31m\]/#\[\033[00m\] '
   else
-    PS1='\[\033[1;38m\][$(timeNow)]\[\033[00m\] \[\033[1;32m\]\u\[\033[00m\]\[\033[1;37m\]@\[\033[00m\]\[\033[1;33m\]\h\[\033[00m\] \[\033[1;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\] \[\033[1;32m\]:/$\[\033[00m\] '
+    PS1='\[\033[1;38m\][$(timeNow)]\[\033[00m\] \[\033[1;34m\]\w\[\033[00m\]\[\033[1;36m\]$(gitPS1)\[\033[00m\]\[\033[1;32m\]/$\[\033[00m\] '
   fi
 else
-    PS1='[$(timeNow)] \u@\h \w$(gitPS1) :/$ '
+    PS1='[$(timeNow)] \w$(gitPS1)/$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -162,7 +162,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export DEBFULLNAME="Md Jahidul Hamid"
-export DEBEMAIL="jahidulhamid@yahoo.com"
-
+PATH=$PATH:$HOME/bin:$HOME/.local/bin

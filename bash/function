@@ -6,3 +6,15 @@ func(){
 echo "I am a sample function"
 }
 getfunc func
+
+fstab_path(){
+	local path=$1
+	local s=
+	local c=
+	for i in $(seq 1 ${#path})
+	do
+		c=${path:i-1:1}
+		s="$s$(printf '\\0%o' "'$c")"
+	done
+	echo "$s"  >/dev/stdout
+}
